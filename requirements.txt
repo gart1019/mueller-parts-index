@@ -1,0 +1,6 @@
+flask
+python-dotenv
+flask-wtf
+flask-security
+Flask-SQLAlchemy-Lite
+flask-sqlalchemy
