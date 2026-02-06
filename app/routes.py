@@ -1,6 +1,6 @@
 from flask import render_template
-from app.forms import LoginForm
 from app import app
+from app.forms import LoginForm
 
 
 @app.route('/')
