@@ -7,10 +7,14 @@ load_dotenv(path)
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'bad key'
-    SQLALCHEMY_ENGINES = {"default": "sqlite:///default.sqlite"}
+
+    SQLALCHEMY_ENGINES = {"default": "sqlite:///db.sqlite"}
+
     SECURITY_PASSWORD_SALT = os.environ.get('SALT')
     REMEMBER_COOKIE_SAMESITE = 'strict'
     SESSION_COOKIE_SAMESITE = 'strict'
-    SQLALCHEMY_ENGINES = {'default': "sqlite:///db.sqlite3"}
-
+    
+    RECAPTCHA_PUBLIC_KEY = "6Lf-UmQsAAAAAKbEmMDYdT2FPwHwA-3E8kiLvzp5"
+    RECAPTCHA_PRIVATE_KEY = os.environ.get('CAPTCHA_KEY')
+    RECAPTCHA_DATA_ATTRS = {'theme': 'dark'}
     

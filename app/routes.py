@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, url_for
 from app import app
 from app.forms import LoginForm
 
@@ -8,11 +8,12 @@ from app.forms import LoginForm
 def index():
     return render_template('index.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
 
-    form.validate_on_submit()
+    if form.validate_on_submit():
+        return render_template('lookup.html', form=form)
 
     return render_template('login.html', form=form)
 
