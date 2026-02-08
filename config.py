@@ -11,3 +11,6 @@ class Config:
     SECURITY_PASSWORD_SALT = os.environ.get('SALT')
     REMEMBER_COOKIE_SAMESITE = 'strict'
     SESSION_COOKIE_SAMESITE = 'strict'
+    SQLALCHEMY_ENGINES = {'default': "sqlite:///db.sqlite3"}
+
+    

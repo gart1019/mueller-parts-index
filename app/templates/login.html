@@ -3,29 +3,34 @@
 
 {%block content%}
 
-<form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
+<div class="mx-auto p-2" style="width: 400px;">
+    <main class="form-signin w-100 p-4">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="form-floating">
 
-    <br>
+                {{ form.username(class_="form-control relay-email-input-with-button-hovered", id="floatingInput", type="email", style="width: 300px;") }}
+                <label for="floatingInput">Email address</label>
+            </div>
 
-    <p>
-        {{ form.username.label }}
-        {{ form.username(size=32) }}
-    </p>
+            <div class="form-floating">
+                {{ form.username(class_="form-control", id="floatingPassword", type="password", style="width: 300px;") }}
+                <label for="floatingPassword">Password</label>
+            </div>
 
-    <p>
-        {{ form.password.label }}
-        {{ form.password(size=32) }}
-    </p>
+            <div class="form-check text-start my-3"> 
+                {{ form.remember_me(class_="form-check-input", type="checkbox", value="remember-me", id="checkDefault")}}
+                <label class="form-check-label" for="checkDefault">Remember me</label> 
+            </div>
 
-    <p>
-        {{ form.remember_me.label }}
-        {{ form.remember_me }}
-    </p>
+            {{ form.submit(class_="btn btn-primary w-50 py-2", style="width: 300px;") }}
 
-    <p>
-        {{ form.submit }}
-    </p>
-</form>
+            <p class="mt-5 mb-3 text-body-secondary">For assistance, contact <span class="fw-bold">garrett@muellerindex.org</span></p>
+        </form>
+    </main>
+</div>
+
+
+
 
 {%endblock%}
