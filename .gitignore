@@ -1,4 +1,5 @@
 venv/
+instance/
 .env
 .flaskenv
 __pychache__

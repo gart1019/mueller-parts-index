@@ -1,6 +1,6 @@
 flask
 python-dotenv
 flask-wtf
-flask-security
+flask-login
 flask-sqlalchemy
 flask-alembic

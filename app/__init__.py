@@ -28,6 +28,7 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.testing = True
 
 db = SQLAlchemy(app)
 

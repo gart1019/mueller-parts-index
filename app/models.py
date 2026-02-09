@@ -31,6 +31,9 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(str(self.password_hash), password)
+    
+    def __repr__(self) -> str:
+        return str(self.email)
 
 class Product(db.Model):
     __tablename__ = "prodcut"

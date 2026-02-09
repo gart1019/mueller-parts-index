@@ -22,7 +22,7 @@ def login():
         user = User.query.filter_by(email=form.username.data).first()
 
         if user is None or not user.check_password(form.password.data):
-            return render_template('login.html', msg="Incorrect username or password.")
+            return redirect(url_for('index'))
         
         next_page = request.args.get('next')
         print(next_page)
@@ -39,6 +39,14 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/register')
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    logout_user()
+    return render_template('register.html')
 
 
 @app.route('/lookup')

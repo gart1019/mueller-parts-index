@@ -29,11 +29,17 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('logout')}}">Sign Out</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('login')}}">Sign In</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="lookup.html">Lookup</a>
+                        <a class="nav-link" href="{{url_for('lookup')}}">Lookup</a>
                     </li>
                 </ul>
                 </div>
