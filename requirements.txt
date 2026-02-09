@@ -3,4 +3,4 @@ python-dotenv
 flask-wtf
 flask-security
 flask-sqlalchemy
-flask-sqlalchemy-lite
+flask-alembic

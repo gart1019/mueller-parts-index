@@ -9,10 +9,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'bad key'
 
     SQLALCHEMY_ENGINES = {"default": "sqlite:///db.sqlite"}
-
-    SECURITY_PASSWORD_SALT = os.environ.get('SALT')
-    REMEMBER_COOKIE_SAMESITE = 'strict'
-    SESSION_COOKIE_SAMESITE = 'strict'
+    SQLALCHEMY_DATABASE_URI = "sqlite:///db.sqlite"
     
     RECAPTCHA_PUBLIC_KEY = "6Lf-UmQsAAAAAKbEmMDYdT2FPwHwA-3E8kiLvzp5"
     RECAPTCHA_PRIVATE_KEY = os.environ.get('CAPTCHA_KEY')
