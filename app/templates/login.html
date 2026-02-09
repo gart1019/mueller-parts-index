@@ -3,10 +3,40 @@
 
 {%block content%}
 
+
 <div class="mx-auto p-2" style="width: 400px;">
+
+    {% for error in form.username.error %}
+        <div class="text-center mx-auto w-100 p-2">
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+                    </svg>
+                    <div class="ps-2">
+                        {{ error }}
+                    </div>
+                </div>
+        </div>
+    {% endfor %}
+
+    {% for error in form.password.error %}
+        <div class="text-center mx-auto w-100 p-2">
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+                    </svg>
+                    <div class="ps-2">
+                        {{ error }}
+                    </div>
+                </div>
+        </div>
+    {% endfor %}
+    
+
     <main class="form-signin w-100 p-4">
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
+            
             <div class="form-floating">
 
                 {{ form.username(class_="form-control relay-email-input-with-button-hovered", id="floatingInput", type="email", style="width: 300px;") }}
@@ -14,13 +44,17 @@
             </div>
 
             <div class="form-floating">
-                {{ form.username(class_="form-control", id="floatingPassword", type="password", style="width: 300px;") }}
+                {{ form.password(class_="form-control", id="floatingPassword", type="password", style="width: 300px;") }}
                 <label for="floatingPassword">Password</label>
             </div>
 
             <div class="form-check text-start my-3"> 
                 {{ form.remember_me(class_="form-check-input", type="checkbox", value="remember-me", id="checkDefault")}}
                 <label class="form-check-label" for="checkDefault">Remember me</label> 
+            </div>
+
+            <div class="pb-5">
+                <!--{{ form.recaptcha }}-->
             </div>
 
             {{ form.submit(class_="btn btn-primary w-50 py-2", style="width: 300px;") }}
