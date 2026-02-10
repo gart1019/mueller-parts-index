@@ -54,12 +54,14 @@
             </div>
 
             <div class="pb-5">
-                <!--{{ form.recaptcha }}-->
+                {{ form.recaptcha }}
             </div>
 
-            {{ form.submit(class_="btn btn-primary w-50 py-2", style="width: 300px;") }}
+            {{ form.submit(class_="btn btn-primary w-50 py-2") }}
 
-            <p class="mt-5 mb-3 text-body-secondary">For assistance, contact <span class="fw-bold">garrett@muellerindex.org</span></p>
+            <p class="mt-5 mb-3 text-body-secondary">Click <a class="fw-bold" href="{{ url_for('register') }}">here</a> to register a new account.</p>
+            <p class="text-body-secondary">For assistance, contact <span class="fw-bold">garrett@muellerindex.org</span></p>
+            
         </form>
     </main>
 </div>

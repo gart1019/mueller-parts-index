@@ -10,12 +10,12 @@ from urllib.parse import urlsplit
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return render_template('index.html')
+        return redirect(url_for('lookup'))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -51,3 +51,7 @@ def register():
 @app.route('/lookup')
 def lookup():
     return render_template('lookup.html')
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
