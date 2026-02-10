@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mueller Excavating Inc. — Dashboard</title>
+  <link rel="stylesheet" href="app.css" />
+</head>
+
+<body>
+  <div class="dash-page">
+    <header class="header">
+      <div class="header-inner">
+        <img
+          class="brand-logo"
+          src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/698aa096c5da0061265e8409/5ef85f072_ChatGPTImageFeb9202608_26_44PM.png"
+          alt="Mueller Excavating Inc."
+        />
+
+        <div class="header-right">
+          <div class="userbox">
+            <div class="user-avatar" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="User">
+                <path d="M20 21a8 8 0 0 0-16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <div class="user-meta">
+              <p class="user-name">User</p>
+              <p class="user-email">user@email.com</p>
+            </div>
+          </div>
+
+          <a class="logout" href="index.html" aria-label="Logout">
+            <svg viewBox="0 0 24 24" class="icon-sm" role="img" aria-label="Logout">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M16 17l5-5-5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 12H9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="logout-text">Logout</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <h2 class="title">Welcome back, <span class="title-name">there</span>!</h2>
+
+      <section class="grid" aria-label="Quick actions">
+        <a class="card" href="#" aria-label="Dashboard">
+          <div class="card-icon" style="--tint:#d42020;">
+            <svg viewBox="0 0 24 24" class="icon-md" role="img" aria-label="Home">
+              <path d="M3 10.5 12 3l9 7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 10v10a1 1 0 0 0 1 1h5v-7h2v7h5a1 1 0 0 0 1-1V10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="card-title">Dashboard</p>
+          <p class="card-sub">View dashboard</p>
+        </a>
+
+        <a class="card" href="#" aria-label="Projects">
+          <div class="card-icon" style="--tint:#3b82f6;">
+            <svg viewBox="0 0 24 24" class="icon-md" role="img" aria-label="Projects">
+              <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14 2v6h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 13h6M9 17h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="card-title">Projects</p>
+          <p class="card-sub">View projects</p>
+        </a>
+
+        <a class="card" href="#" aria-label="Team">
+          <div class="card-icon" style="--tint:#10b981;">
+            <svg viewBox="0 0 24 24" class="icon-md" role="img" aria-label="Team">
+              <path d="M17 21a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M10 13a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 21a4 4 0 0 0-3-3.87" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="card-title">Team</p>
+          <p class="card-sub">View team</p>
+        </a>
+
+        <a class="card" href="#" aria-label="Settings">
+          <div class="card-icon" style="--tint:#8b5cf6;">
+            <svg viewBox="0 0 24 24" class="icon-md" role="img" aria-label="Settings">
+              <path d="M12 15.5a3.5 3.5 0 1 0-3.5-3.5 3.5 3.5 0 0 0 3.5 3.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M19.4 15a7.8 7.8 0 0 0 .1-2l2-1.5-2-3.5-2.4 1a7.6 7.6 0 0 0-1.7-1l-.3-2.6H9l-.3 2.6a7.6 7.6 0 0 0-1.7 1l-2.4-1-2 3.5 2 1.5a7.8 7.8 0 0 0 .1 2l-2 1.5 2 3.5 2.4-1a7.6 7.6 0 0 0 1.7 1l.3 2.6h6.1l.3-2.6a7.6 7.6 0 0 0 1.7-1l2.4 1 2-3.5Z"
+                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="card-title">Settings</p>
+          <p class="card-sub">View settings</p>
+        </a>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

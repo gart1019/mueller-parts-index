@@ -1,0 +1,338 @@
+/* ===== Script 3: Tailwind/shadcn variables -> plain CSS ===== */
+:root{
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --radius: 0.5rem;
+
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+.dark{
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 0 0% 83.1%;
+  --sidebar-background: 240 5.9% 10%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 224.3 76.3% 48%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+/* ===== Base reset (replaces @tailwind base) ===== */
+*{ box-sizing:border-box; }
+html, body{ height:100%; }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: hsl(var(--foreground));
+  background: radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 50%, #000 100%);
+}
+
+/* ===== Shared components ===== */
+.icon{ width:20px; height:20px; }
+.icon-sm{ width:16px; height:16px; }
+.icon-md{ width:24px; height:24px; }
+.icon-xl{ width:48px; height:48px; }
+
+.card{
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(40,40,40,0.95) 0%, rgba(25,25,25,0.98) 100%);
+  border: 1px solid rgba(60,60,60,0.5);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+/* ===== Login page ===== */
+.auth-page{
+  min-height: 100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding: 0 16px;
+  position:relative;
+  overflow:hidden;
+}
+
+.vignette{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+}
+
+.logo-wrap{ margin-bottom: 32px; z-index:1; }
+.logo{ width: min(550px, 92vw); height:auto; display:block; }
+
+.card-wrap{ width:100%; max-width:448px; z-index:1; position:relative; }
+
+.avatar{
+  width:96px; height:96px;
+  border-radius:999px;
+  margin: 0 auto -48px auto;
+  display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+  border: 3px solid #4a4a4a;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  color:#6b7280;
+}
+
+.auth-card{ padding: 64px 32px 24px 32px; }
+
+.field{ margin-bottom:16px; }
+
+.input-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-radius:6px;
+  padding:12px 16px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #252525 100%);
+  border: 1px solid #3a3a3a;
+  color:#6b7280;
+}
+
+input[type="text"], input[type="password"]{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#d1d5db;
+  font-size:15px;
+}
+input::placeholder{ color:#6b7280; }
+
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:24px;
+}
+
+.forgot{
+  color:#9ca3af;
+  font-size:14px;
+  text-decoration:none;
+}
+.forgot:hover{ color:#d1d5db; }
+
+/* Checkbox (CSS-only) */
+.remember{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  user-select:none;
+  font-size:14px;
+  color:#9ca3af;
+}
+.remember input{
+  position:absolute;
+  opacity:0;
+  width:1px; height:1px;
+}
+.check-ui{
+  width:16px; height:16px;
+  border-radius:4px;
+  border:1px solid #6b7280;
+  display:inline-block;
+  position:relative;
+}
+.remember input:checked + .check-ui{
+  background:#4b5563;
+  border-color:#4b5563;
+}
+.remember input:checked + .check-ui::after{
+  content:"";
+  position:absolute;
+  left:4px; top:1px;
+  width:5px; height:9px;
+  border: solid rgba(255,255,255,0.9);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Red button */
+.btn-red{
+  width:100%;
+  padding:12px 0;
+  border-radius:6px;
+  border:1px solid #6a0a0a;
+  cursor:pointer;
+  font-weight:800;
+  letter-spacing:0.12em;
+  font-size:16px;
+  color:#fff;
+  background: linear-gradient(180deg, #d42020 0%, #b01515 50%, #8a0e0e 100%);
+  box-shadow: 0 4px 15px rgba(180, 20, 20, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.btn-red:hover{ filter: brightness(1.1); }
+.btn-red:active{ filter: brightness(0.9); }
+
+.footer{
+  margin-top:32px;
+  font-size:12px;
+  color:#4b5563;
+  z-index:1;
+}
+
+/* ===== Dashboard page ===== */
+.dash-page{ min-height:100vh; }
+
+.header{
+  border-bottom: 1px solid #1f2937;
+  padding: 16px 24px;
+}
+.header-inner{
+  max-width: 1280px;
+  margin: 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.brand-logo{ height:80px; width:auto; display:block; }
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.userbox{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.user-avatar{
+  width:40px; height:40px;
+  border-radius:999px;
+  background:#374151;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#9ca3af;
+}
+.user-meta{ display:none; }
+@media (min-width:640px){ .user-meta{ display:block; } }
+
+.user-name{
+  margin:0;
+  color:#fff;
+  font-size:14px;
+  font-weight:600;
+  line-height:1.2;
+}
+.user-email{
+  margin:2px 0 0 0;
+  color:#6b7280;
+  font-size:12px;
+}
+
+.logout{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 16px;
+  border-radius:6px;
+  color:#9ca3af;
+  text-decoration:none;
+}
+.logout:hover{ color:#fff; background:#1f2937; }
+.logout-text{ display:none; font-size:14px; }
+@media (min-width:640px){ .logout-text{ display:inline; } }
+
+.main{
+  max-width:1280px;
+  margin:0 auto;
+  padding: 32px 24px;
+}
+.title{
+  margin:0 0 24px 0;
+  color:#fff;
+  font-size:24px;
+  font-weight:800;
+}
+.title-name{ color:#fff; }
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+@media (min-width:640px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1024px){ .grid{ grid-template-columns:repeat(4,1fr); } }
+
+.card{
+  display:block;
+  padding:24px;
+  border-radius:10px;
+  text-decoration:none;
+  color:inherit;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+.card:hover{ transform: scale(1.03); filter: brightness(1.05); }
+
+.card-icon{
+  width:48px; height:48px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:16px;
+  background: color-mix(in srgb, var(--tint) 18%, transparent);
+  color: var(--tint);
+}
+
+.card-title{
+  margin:0;
+  color:#fff;
+  font-weight:600;
+  font-size:16px;
+}
+.card-sub{
+  margin:6px 0 0 0;
+  color:#6b7280;
+  font-size:14px;
+}
