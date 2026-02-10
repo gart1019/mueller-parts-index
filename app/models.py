@@ -14,7 +14,6 @@ def load_user(userId):
 # ---------------- Database Models ----------------
 #Everything is non-nullable by default
 
-
 class Role(db.Model):
     __tablename__ = "role"
     id: Mapped[int] = mapped_column(primary_key=True)

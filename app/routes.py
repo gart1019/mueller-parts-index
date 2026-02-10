@@ -25,7 +25,6 @@ def login():
             return redirect(url_for('index'))
         
         next_page = request.args.get('next')
-        print(next_page)
         if not next_page or urlsplit(next_page).netloc != '':
             next_page = url_for('index')
        
@@ -45,11 +44,10 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
 
-    logout_user()
+    
     return render_template('register.html')
 
 
 @app.route('/lookup')
-@login_required
 def lookup():
     return render_template('lookup.html')

@@ -8,13 +8,13 @@ class LoginForm(FlaskForm):
     username = StringField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     remember_me = BooleanField("Remember Me")
-    recaptcha = RecaptchaField()
+    # recaptcha = RecaptchaField()
     submit = SubmitField("Sign In")
 
-    def validate_username(self, username):
-        user = User.query.filter_by(email=username.data).first()
-        if user is None:
-            raise ValidationError('Incorrect email or password.')
+    # def validate_username(self, username):
+    #     user = User.query.filter_by(email=username.data).first()
+    #     if user is None:
+    #         raise ValidationError('Incorrect email or password.')
         
     # def validate_password(self, password):
     #     user = User.query.filter_by(password_hash=generate_password_hash(password.data)).first()
