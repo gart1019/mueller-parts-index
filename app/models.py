@@ -22,6 +22,7 @@ class Role(db.Model):
 class User(UserMixin, db.Model):
     __tablename__ = "user"
     id: Mapped[int] = mapped_column(primary_key=True)
+    full_name: Mapped[str] = mapped_column(String(50))
     email: Mapped[str] = mapped_column(unique=True)
     password_hash: Mapped[Optional[str]] = mapped_column(String(50))
 

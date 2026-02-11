@@ -8,7 +8,7 @@ class LoginForm(FlaskForm):
     username = StringField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     remember_me = BooleanField("Remember Me")
-    recaptcha = RecaptchaField()
+    # recaptcha = RecaptchaField()
     submit = SubmitField("Sign In")
 
     def validate_username(self, username):

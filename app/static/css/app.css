@@ -308,7 +308,7 @@ input::placeholder{ color:#6b7280; }
   display:block;
   padding:24px;
   border-radius:10px;
-  text-decoration:none;
+  text-decoration: none;
   color:inherit;
   transition: transform 160ms ease, filter 160ms ease;
 }
@@ -335,4 +335,19 @@ input::placeholder{ color:#6b7280; }
   margin:6px 0 0 0;
   color:#6b7280;
   font-size:14px;
+}
+
+table{
+  display: block;
+  border-radius: 10px;
+  color: inherit;
+  border: 1px solid;
+}
+
+.inv-table {
+  width: 75%;
+}
+
+tr:nth-child(even) {
+  background-color: #d6eeee5c;
 }

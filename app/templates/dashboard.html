@@ -5,5 +5,67 @@
 {% endblock %}
 
 {% block content %}
+<main class="main"> 
+    <h2 class="title">Welcome back, {{ current_user.full_name }}</h2>
 
+    <section class="grid" aria-label="Quick actions">
+    <a class="card" href="{{url_for('inventory')}}" aria-label="Dashboard">
+        <div class="card-icon" style="--tint:#d42020;">
+        <svg viewBox="0 0 24 24" class="icon-md" role="img" aria-label="Home">
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <rect x="8" y="2" width="8" height="4" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></rect>
+        </svg>
+        </div>
+        <p class="card-title">Inventory</p>
+        <p class="card-sub">Parts in stock</p>
+    </a>
+
+    <a class="card" href="#" aria-label="Audit Log">
+        <div class="card-icon" style="--tint:#3b82f6;">
+        <svg viewBox="0 0 24 24" class="icon-md" role="img" aria-label="Projects">
+
+            <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14 3v5h5M16 13H8M16 17H8M10 9H8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        </div>
+        <p class="card-title">Audit Log</p>
+        <p class="card-sub">Inventory logs</p>
+    </a>
+
+    <a class="card" href="#" aria-label="Audit Log">
+        <div class="card-icon" style="--tint:#F5E427;">
+        <svg viewBox="0 0 24 24" class="icon-md" role="img" aria-label="Projects">
+            <path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M15 7h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        </div>
+        <p class="card-title">Analytics</p>
+        <p class="card-sub">Inventory statistics</p>
+    </a>
+
+    <a class="card" href="#" aria-label="Team">
+        <div class="card-icon" style="--tint:#10b981;">
+        <svg viewBox="0 0 24 24" class="icon-md" role="img" aria-label="Team">
+            <path d="M17 21a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M10 13a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 21a4 4 0 0 0-3-3.87" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        </div>
+        <p class="card-title">Team</p>
+        <p class="card-sub">Manage staff members</p>
+    </a>
+
+    <a class="card" href="#" aria-label="Settings">
+        <div class="card-icon" style="--tint:#8b5cf6;">
+        <svg viewBox="0 0 24 24" class="icon-md" role="img" aria-label="Settings">
+            <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+        </div>
+        <p class="card-title">Settings</p>
+        <p class="card-sub">Site settings</p>
+    </a>
+    </section>
+</main>
 {% endblock %}

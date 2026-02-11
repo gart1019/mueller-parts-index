@@ -4,3 +4,4 @@ flask-wtf
 flask-login
 flask-sqlalchemy
 flask-alembic
+flask-debugtoolbar

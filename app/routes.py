@@ -10,44 +10,48 @@ from urllib.parse import urlsplit
 @app.route('/')
 @app.route('/dashboard')
 @login_required
-def index():
+def dashboard():
     return render_template('dashboard.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('lookup'))
+        return redirect(url_for('dashboard'))
 
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.username.data).first()
 
-        if user is None or not user.check_password(form.password.data):
-            return redirect(url_for('index'))
-        
-        next_page = request.args.get('next')
-        if not next_page or urlsplit(next_page).netloc != '':
-            next_page = url_for('index')
-       
-        login_user(user, remember=form.remember_me.data)
-        return redirect(next_page)
+        if user is None or not user.check_password(form.password.data): #fail block
+            return redirect(url_for('login'))
 
+        login_user(user, remember=form.remember_me.data) #success
+
+        next_page = request.args.get('next')
+        if not next_page or urlsplit(next_page).netloc != '': #where to go next
+            next_page = url_for('dashboard')
+       
+        return redirect(next_page)
     return render_template('login.html', form=form)
+
 
 @app.route('/logout')
 # @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @app.route('/register')
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
-
-    
+        return redirect(url_for('dashboard'))
     return render_template('register.html')
 
+@app.route('/inventory')
+@login_required
+def inventory():
+    return render_template('inventory.html')
 
 @app.route('/lookup')
 def lookup():
