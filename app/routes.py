@@ -8,9 +8,10 @@ from urllib.parse import urlsplit
 
 
 @app.route('/')
-@app.route('/index')
+@app.route('/dashboard')
+@login_required
 def index():
-    return redirect(url_for('login'))
+    return render_template('dashboard.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -34,7 +35,7 @@ def login():
     return render_template('login.html', form=form)
 
 @app.route('/logout')
-@login_required
+# @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
@@ -51,7 +52,3 @@ def register():
 @app.route('/lookup')
 def lookup():
     return render_template('lookup.html')
-
-@app.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')

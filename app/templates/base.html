@@ -3,59 +3,62 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html data-bs-theme="dark">
+<html lang="en" class="dark">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Mueller Parts Index</title>
-        <!--<meta name="description" content="">-->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Mueller Excavating Inc.</title>
+
+        {% block style %}
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+            <link rel='stylesheet' href={{url_for('static', filename='css/app.css')}}>
+        {% endblock %}
 
     </head>
-    <body>
-        
+        <body>
+            {% if current_user.is_authenticated %}
+            <header class="header">
+                <div class="header-inner">
+                    <img
+                    class="brand-logo"
+                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/698aa096c5da0061265e8409/5ef85f072_ChatGPTImageFeb9202608_26_44PM.png"
+                    alt="Mueller Excavating Inc."
+                    />
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{url_for('index')}}">Mueller Parts Index</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    {% if current_user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('dashboard')}}">Dashboard</a>
-                    </li>
+                    <div class="header-right">
+                    <div class="userbox">
+                        <div class="user-avatar" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="User">
+                            <path d="M20 21a8 8 0 0 0-16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        </div>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('lookup')}}">Lookup</a>
-                    </li>
+                        <div class="user-meta">
+                        <p class="user-name">User</p>
+                        <p class="user-email">user@email.com</p>
+                        </div>
+                    </div>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('logout')}}">Sign Out</a>
-                    </li>
-
-                    {% else %}
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('login')}}">Sign In</a>
-                    </li>
-
-                    {% endif %}
-                </ul>
+                    <a class="logout" href="index.html" aria-label="Logout">
+                        <svg viewBox="0 0 24 24" class="icon-sm" role="img" aria-label="Logout">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M16 17l5-5-5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 12H9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span class="logout-text">Logout</span>
+                    </a>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </header>
+            {% endif %}
 
+        {% block content %}
 
-
-
-        {% block content %}{% endblock content %}
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    </body>
+        {% endblock %}
+        </body>
 </html>
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>-->

@@ -1,72 +1,69 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
 
-{%block content%}
+{% block content %}
 
+<main class="auth-page">
+    <div class="vignette" aria-hidden="true"></div>
 
-<div class="mx-auto p-2" style="width: 400px;">
+    <div class="logo-wrap">
+    <img
+        class="logo"
+        src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/698aa096c5da0061265e8409/5ef85f072_ChatGPTImageFeb9202608_26_44PM.png"
+        alt="Mueller Excavating Inc."
+    />
+    </div>
 
-    {% for error in form.username.error %}
-        <div class="text-center mx-auto w-100 p-2">
-                <div class="alert alert-warning d-flex align-items-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
-                    </svg>
-                    <div class="ps-2">
-                        {{ error }}
-                    </div>
-                </div>
+    <section class="card-wrap" aria-label="Login form">
+    <!--<div class="avatar" aria-hidden="true">
+        
+        <svg viewBox="0 0 24 24" class="icon-xl" role="img" aria-label="User icon">
+        <path d="M20 21a8 8 0 0 0-16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div> -->
+
+    <div class="card auth-card">
+        <!-- No JS: this can only submit to a URL or link -->
+        <form action="dashboard.html" method="GET">
+        <div class="field">
+            <div class="input-row">
+            <!-- User icon -->
+            <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Username">
+                <path d="M20 21a8 8 0 0 0-16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            {{ form.username(type="text", placeholder="Email", autocomplete="username")}}
+            </div>
         </div>
-    {% endfor %}
 
-    {% for error in form.password.error %}
-        <div class="text-center mx-auto w-100 p-2">
-                <div class="alert alert-warning d-flex align-items-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
-                    </svg>
-                    <div class="ps-2">
-                        {{ error }}
-                    </div>
-                </div>
+        <div class="field">
+            <div class="input-row">
+            <!-- Lock icon -->
+            <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Password">
+                <path d="M17 11V8a5 5 0 0 0-10 0v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M7 11h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            {{ form.username(type="password", placeholder="••••••••", autocomplete="current-password")}}
+            </div>
         </div>
-    {% endfor %}
-    
 
-    <main class="form-signin w-100 p-4">
-        <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            
-            <div class="form-floating">
+        <div class="row">
+            <label class="remember">
+            <input type="checkbox" name="remember" checked />
+            <span class="check-ui" aria-hidden="true"></span>
+            <span class="remember-text">Remember me</span>
+            </label>
 
-                {{ form.username(class_="form-control relay-email-input-with-button-hovered", id="floatingInput", type="email", style="width: 300px;") }}
-                <label for="floatingInput">Email address</label>
-            </div>
+            <a class="forgot" href="#" aria-label="Forgot password">Forgot Password?</a>
+        </div>
 
-            <div class="form-floating">
-                {{ form.password(class_="form-control", id="floatingPassword", type="password", style="width: 300px;") }}
-                <label for="floatingPassword">Password</label>
-            </div>
-
-            <div class="form-check text-start my-3"> 
-                {{ form.remember_me(class_="form-check-input", type="checkbox", value="remember-me", id="checkDefault")}}
-                <label class="form-check-label" for="checkDefault">Remember me</label> 
-            </div>
-
-            <div class="pb-5">
-                {{ form.recaptcha }}
-            </div>
-
-            {{ form.submit(class_="btn btn-primary w-50 py-2") }}
-
-            <p class="mt-5 mb-3 text-body-secondary">Click <a class="fw-bold" href="{{ url_for('register') }}">here</a> to register a new account.</p>
-            <p class="text-body-secondary">For assistance, contact <span class="fw-bold">garrett@muellerindex.org</span></p>
-            
+        <button class="btn-red" type="submit">LOGIN</button>
         </form>
-    </main>
-</div>
+    </div>
+    </section>
 
+    <p class="footer">© 2026 Mueller Excavating Inc. All rights reserved.</p>
+</main>
 
-
-
-{%endblock%}
+{% endblock %}  
