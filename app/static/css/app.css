@@ -339,15 +339,26 @@ input::placeholder{ color:#6b7280; }
 
 table{
   display: block;
-  border-radius: 10px;
-  color: inherit;
-  border: 1px solid;
+  background-color:rgba(0, 0, 0, 0);
 }
 
-.inv-table {
-  width: 75%;
+tr, th, td {
+  padding: 10px;
 }
 
-tr:nth-child(even) {
-  background-color: #d6eeee5c;
+.inv-table-bg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5%;
+}
+
+a.breadcrumb-item-ext{
+  color: #da3b4a;
+  text-decoration: none;
+}
+
+a.breadcrumb-item-ext:hover{
+  color: #cfc8c9;
+  text-decoration: underline;
 }

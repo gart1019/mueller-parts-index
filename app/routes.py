@@ -53,6 +53,11 @@ def register():
 def inventory():
     return render_template('inventory.html')
 
+@app.route('/inventory/configure')
+@login_required
+def config_inventory():
+    return render_template('base.html')
+
 @app.route('/lookup')
 def lookup():
     return render_template('lookup.html')
