@@ -37,7 +37,6 @@ def login():
 
 
 @app.route('/logout')
-# @login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
@@ -48,16 +47,18 @@ def register():
         return redirect(url_for('dashboard'))
     return render_template('register.html')
 
-@app.route('/inventory')
+@app.route('/dashboard/inventory')
 @login_required
 def inventory():
     return render_template('inventory.html')
 
-@app.route('/inventory/configure')
-@login_required
-def config_inventory():
-    return render_template('base.html')
+# @app.route('/dashboard/inventory/configure')
+# @login_required
+# def config_inventory():
+#     return render_template('base.html')
 
-@app.route('/lookup')
-def lookup():
-    return render_template('lookup.html')
+@app.route('/dashboard/team')
+@login_required
+def team():
+    members = User.query.all()
+    return render_template('team_page.html', members=members)

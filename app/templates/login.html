@@ -14,6 +14,12 @@
     />
     </div>
 
+    {% if form.username.errors|length > 0 or form.password.errors|length > 0 %}
+        <div class="alert alert-warning" role="alert">
+            Invalid username or password.
+        </div>
+    {% endif %}
+
     <section class="card-wrap" aria-label="Login form">
     <!--<div class="avatar" aria-hidden="true">
         
@@ -51,12 +57,13 @@
 
             <div class="row">
                 <label class="remember">
-                {{ form.remember_me(type="checkbox") }}
-                <span class="check-ui" aria-hidden="true"></span>
-                <span class="remember-text">Remember me</span>
+                    {{ form.remember_me(type="checkbox") }}
+                    <span class="check-ui" aria-hidden="true"></span>
+                    <span class="remember-text">Remember me</span>
                 </label>
 
                 <a class="forgot" href="#" aria-label="Forgot password">Forgot Password?</a>
+                <a class="forgot" href="#" aria-label="Registration">Register Here</a>
             </div>
 
             {{ form.submit(class='btn-red') }}

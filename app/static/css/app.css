@@ -167,6 +167,7 @@ input::placeholder{ color:#6b7280; }
   user-select:none;
   font-size:14px;
   color:#9ca3af;
+  margin-bottom: 10px;
 }
 .remember input{
   position:absolute;
@@ -305,7 +306,7 @@ input::placeholder{ color:#6b7280; }
 @media (min-width:1024px){ .grid{ grid-template-columns:repeat(4,1fr); } }
 
 .card{
-  display:block;
+  /* display:block; */
   padding:24px;
   border-radius:10px;
   text-decoration: none;
@@ -351,6 +352,12 @@ tr, th, td {
   justify-content: center;
   align-items: center;
   padding-top: 5%;
+  /* border: solid white; */
+}
+
+.breacrumb-nav{
+  top: 10px;
+  left: 20%;
 }
 
 a.breadcrumb-item-ext{
