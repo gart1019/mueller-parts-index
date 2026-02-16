@@ -14,9 +14,10 @@ loginManager = LoginManager()
 loginManager.init_app(app)
 loginManager.login_view = "login" # type: ignore
 
-from app.models import User, Product, UserView, Role
-from app import routes  # import AFTER db is created for shell context
+from app.models import User, Product, Brand, UserView, BrandView, ProductView
+from app import routes
 
 admin = Admin(app, name='Mueller Parts Index', theme=theme.BootstrapTheme(folder="bootstrap4",base_template="admin/base.html", swatch="slate",fluid=False))
 admin.add_view(UserView(User, db.session))
-admin.add_view(ModelView(Product, db.session))
+admin.add_view(ProductView(Product, db.session))
+admin.add_view(BrandView(Brand, db.session))

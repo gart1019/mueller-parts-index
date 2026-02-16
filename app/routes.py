@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, request
 from app import app, db
-from app.forms import LoginForm
+from app.forms import LoginForm, RegisterForm
 from app.models import User, Role
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from sqlalchemy import select
@@ -45,20 +45,25 @@ def logout():
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
-    return render_template('register.html')
+    
+    form = RegisterForm()
+    if form.validate_on_submit:
+        pass
 
-@app.route('/dashboard/inventory')
-@login_required
-def inventory():
-    return render_template('inventory.html')
+    return render_template('register.html', form=form)
+
+# @app.route('/dashboard/inventory')
+# @login_required
+# def inventory():
+#     return render_template('inventory.html')
 
 # @app.route('/dashboard/inventory/configure')
 # @login_required
 # def config_inventory():
 #     return render_template('base.html')
 
-@app.route('/dashboard/team')
-@login_required
-def team():
-    members = User.query.all()
-    return render_template('team_page.html', members=members)
+# @app.route('/dashboard/team')
+# @login_required
+# def team():
+#     members = User.query.all()
+#     return render_template('team_page.html', members=members)

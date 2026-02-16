@@ -1,0 +1,24 @@
+{# app/templates/admin/master.html #}
+
+{% import 'admin/layout.html' as layout with context -%}
+{% import 'admin/static.html' as admin_static with context %}
+
+{% extends 'admin/base.html' %}
+
+{% block brand %}
+  <a class="navbar-brand" href="{{ url_for('dashboard') }}">{{ admin_view.admin.name }}</a>
+{% endblock %}
+
+
+{% block main_menu %}
+ <ul class="nav navbar-nav mr-auto">
+    <li class="active">
+      <a class="nav-link disabled">Configure {{ admin_view.name }}s</a>
+    </li>
+  </ul>
+{% endblock %}
+
+
+{% block access_control %}
+  <h4>{{ current_user }}</h4>
+{% endblock %}

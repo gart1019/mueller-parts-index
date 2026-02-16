@@ -1,77 +1,66 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 
 {% block content %}
-
-<main class="auth-page">
+  <main class="auth-page">
     <div class="vignette" aria-hidden="true"></div>
 
     <div class="logo-wrap">
-    <img
-        class="logo"
-        src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/698aa096c5da0061265e8409/5ef85f072_ChatGPTImageFeb9202608_26_44PM.png"
-        alt="Mueller Excavating Inc."
-    />
+      <img class="logo" src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/698aa096c5da0061265e8409/5ef85f072_ChatGPTImageFeb9202608_26_44PM.png" alt="Mueller Excavating Inc." />
     </div>
 
     {% if form.username.errors|length > 0 or form.password.errors|length > 0 %}
-        <div class="alert alert-warning" role="alert">
-            Invalid username or password.
-        </div>
+      <div class="alert alert-warning" role="alert">Invalid username or password.</div>
     {% endif %}
 
     <section class="card-wrap" aria-label="Login form">
-    <!--<div class="avatar" aria-hidden="true">
+      <!--  <div class="avatar" aria-hidden="true">
         
         <svg viewBox="0 0 24 24" class="icon-xl" role="img" aria-label="User icon">
         <path d="M20 21a8 8 0 0 0-16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-    </div> -->
+    </div>   -->
 
-    <div class="card auth-card">
+      <div class="card auth-card">
         <!-- No JS: this can only submit to a URL or link -->
         <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <div class="field">
-                <div class="input-row">
-                <!-- User icon -->
-                <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Username">
-                    <path d="M20 21a8 8 0 0 0-16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                {{ form.username(type="text", placeholder="Email", autocomplete="username")}}
-                </div>
+          {{ form.hidden_tag() }}
+          <div class="field">
+            <div class="input-row">
+              <!-- User icon -->
+              <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Username">
+                <path d="M20 21a8 8 0 0 0-16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {{ form.username(type='text', placeholder='Email', autocomplete='username') }}
             </div>
+          </div>
 
-            <div class="field">
-                <div class="input-row">
-                <!-- Lock icon -->
-                <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Password">
-                    <path d="M17 11V8a5 5 0 0 0-10 0v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M7 11h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                {{ form.password(type="password", placeholder="••••••••", autocomplete="current-password")}}
-                </div>
+          <div class="field">
+            <div class="input-row">
+              <!-- Lock icon -->
+              <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Password">
+                <path d="M17 11V8a5 5 0 0 0-10 0v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M7 11h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {{ form.password(type='password', placeholder='••••••••', autocomplete='current-password') }}
             </div>
+          </div>
 
-            <div class="row">
-                <label class="remember">
-                    {{ form.remember_me(type="checkbox") }}
-                    <span class="check-ui" aria-hidden="true"></span>
-                    <span class="remember-text">Remember me</span>
-                </label>
-
-                <a class="forgot" href="#" aria-label="Forgot password">Forgot Password?</a>
-                <a class="forgot" href="#" aria-label="Registration">Register Here</a>
-            </div>
-
-            {{ form.submit(class='btn-red') }}
+          <div class="row">
+            <label class="remember">
+              {{ form.remember_me(type='checkbox') }}
+              <span class="check-ui" aria-hidden="true"></span>
+              <span class="remember-text">Remember me</span>
+            </label>
+            <a class="forgot" href="#" aria-label="Forgot password">Forgot Password?</a>
+            <a class="forgot" href="{{ url_for('register') }}" aria-label="Registration">Register Here</a>
+          </div>
+          {{ form.submit(class='btn-red') }}
         </form>
-    </div>
+      </div>
     </section>
 
     <p class="footer">© 2026 Mueller Excavating Inc. All rights reserved.</p>
-</main>
-
-{% endblock %}  
+  </main>
+{% endblock %}
