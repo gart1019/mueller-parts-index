@@ -29,9 +29,9 @@ class RegisterForm(FlaskForm):
     # recaptcha = RecaptchaField()
     submit = SubmitField("Register")
 
-    def validate_username(self, username):
-        user = User.query.filter_by(email=username.data).first()
-        if user is None:
+    def validate_username(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is not None:
             raise ValidationError()
         
     # def validate_password(self, password):

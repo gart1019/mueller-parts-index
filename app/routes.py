@@ -11,6 +11,8 @@ from urllib.parse import urlsplit
 @app.route('/dashboard')
 @login_required
 def dashboard():
+    if not current_user.approved:
+        return redirect('inactive')
     return render_template('dashboard.html')
 
 
@@ -41,16 +43,25 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     
     form = RegisterForm()
     if form.validate_on_submit:
-        pass
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is not None: #fail block
+            return redirect(url_for('login'))
 
     return render_template('register.html', form=form)
+
+@app.route('/inactive')
+@login_required
+def inactive():
+    if current_user.approved:
+        return redirect(url_for('dashboard'))
+    return render_template('inactive.html')
 
 # @app.route('/dashboard/inventory')
 # @login_required
