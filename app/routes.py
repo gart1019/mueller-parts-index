@@ -63,10 +63,12 @@ def inactive():
         return redirect(url_for('dashboard'))
     return render_template('inactive.html')
 
-# @app.route('/dashboard/inventory')
-# @login_required
-# def inventory():
-#     return render_template('inventory.html')
+@app.route('/verify/<id>')
+@login_required
+def inventory(id):
+    user = User.query.filter_by()
+
+    return render_template('inventory.html')
 
 # @app.route('/dashboard/inventory/configure')
 # @login_required

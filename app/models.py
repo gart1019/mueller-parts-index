@@ -1,5 +1,5 @@
 from flask import redirect
-from sqlalchemy import String, Integer, ForeignKey, Boolean
+from sqlalchemy import String, Integer, ForeignKey, Boolean, UUID
 from datetime import datetime, timezone
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -19,6 +19,7 @@ def load_user(userId):
 class User(UserMixin, db.Model):
     __tablename__ = "user"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    verification_id: Mapped[UUID] = mapped_column(UUID(), unique=True)
     full_name: Mapped[str] = mapped_column(String(50))
     email: Mapped[str] = mapped_column(unique=True)
     approved: Mapped[Boolean] = mapped_column(Boolean(), default=False)
