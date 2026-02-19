@@ -108,6 +108,11 @@ body{
 
 .card-wrap{ width:100%; max-width:448px; z-index:1; position:relative; }
 
+.alert{
+  padding-bottom: 0%;
+  padding-left: 0%;
+}
+
 .avatar{
   width:96px; height:96px;
   border-radius:999px;

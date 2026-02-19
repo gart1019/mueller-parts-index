@@ -5,4 +5,3 @@ flask-admin[images,export,sqlalchemy]
 flask-login
 flask-sqlalchemy
 flask-alembic
-flask-debugtoolbar

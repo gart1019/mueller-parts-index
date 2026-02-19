@@ -11,8 +11,8 @@ from urllib.parse import urlsplit
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    if not current_user.approved:
-        return redirect('inactive')
+    if not current_user.account_active:
+        return redirect(url_for('inactive'))
     return render_template('dashboard.html')
 
 
@@ -45,21 +45,32 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and current_user.account_active:
         return redirect(url_for('dashboard'))
     
     form = RegisterForm()
-    if form.validate_on_submit:
-        user = User.query.filter_by(email=form.email.data).first()
-        if user is not None: #fail block
-            return redirect(url_for('login'))
+    if form.validate_on_submit():
+        user = User(e=form.email.data, n=form.full_name.data)
+        user.set_password(password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        db.session.refresh(user)
+
+        login_user(user=user)
+        print("db flag:", user.__dict__.get("active") or user.__dict__.get("is_active"))
+        print("flask-login is_active:", current_user.is_active)
+
+        return redirect(url_for('inactive'))
 
     return render_template('register.html', form=form)
+
+
+
 
 @app.route('/inactive')
 @login_required
 def inactive():
-    if current_user.approved:
+    if current_user.account_active:
         return redirect(url_for('dashboard'))
     return render_template('inactive.html')
 
