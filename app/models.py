@@ -21,7 +21,7 @@ class User(UserMixin, db.Model):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     full_name: Mapped[str] = mapped_column(String(50))
     email: Mapped[str] = mapped_column(unique=True)
-    approved: Mapped[Boolean] = mapped_column(Boolean(), default=False)
+    account_active: Mapped[Boolean] = mapped_column(Boolean(), default=False)
     password_hash: Mapped[Optional[str]] = mapped_column(String(150))
     created_at: Mapped[datetime] = mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
 
@@ -30,6 +30,11 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(str(self.password_hash), password)
+    
+    def __init__(self, n, e) -> None:
+        self.full_name = n
+        self.email = e
+        
     
     def __repr__(self) -> str:
         return str(self.full_name)
@@ -108,7 +113,7 @@ class BaseView(ModelView):
 
 class UserView(BaseView, ModelView):
     can_create = False
-    column_editable_list = ['full_name', 'email', 'approved']
+    column_editable_list = ['full_name', 'email', 'account_active']
     column_searchable_list = ['full_name', 'email']
 
 class ProductView(BaseView, ModelView):

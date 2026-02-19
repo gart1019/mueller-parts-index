@@ -1,8 +1,7 @@
 flask
 python-dotenv
-flask-wtf
+flask-wtf[email]
 flask-admin[images,export,sqlalchemy]
 flask-login
 flask-sqlalchemy
 flask-alembic
-flask-debugtoolbar
