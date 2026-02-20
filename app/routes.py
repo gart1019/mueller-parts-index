@@ -12,7 +12,7 @@ from urllib.parse import urlsplit
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    if not current_user.account_active:
+    if not current_user.account_active or not current_user.email_verified:
         return redirect(url_for('inactive'))
     return render_template('dashboard.html')
 
@@ -21,8 +21,6 @@ def dashboard():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
-    elif current_user.account_active is False:
-        return render_template('register.html', form=None, show_form=False)
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -48,7 +46,7 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if current_user.is_authenticated and current_user.account_active: #technically dont need both
+    if current_user.is_authenticated: #technically dont need both
         return redirect(url_for('dashboard'))
     
     form = RegisterForm()
@@ -59,16 +57,16 @@ def register():
         db.session.commit()
         db.session.refresh(user)
 
-        token = generate_token(form.email.data)
+        token = generate_token(form.email.data) #sign a token representing the users email
         verification_url = url_for('verify', token=token, _external=True) #external to create absolute url
-        send_verification_email(form.email.data, form.full_name.data, verification_url=verification_url)
+        send_verification_email(form.email.data, form.full_name.data, verification_url=verification_url) #send email with link
 
         print("db flag:", user.__dict__.get("active") or user.__dict__.get("is_active"))
         print("flask-login is_active:", current_user.is_active)
 
-        # login_user(user=user)
-        return render_template('register.html', form=None, show_form=False)
-    return render_template('register.html', form=form, show_form=True)
+        return render_template('register.html', form=form, email_feedback="Please check your inbox!")
+    return render_template('register.html', form=form, email_feedback=None)
+
 
 
 @app.route('/verify/<token>')
@@ -81,6 +79,17 @@ def verify(token):
         db.session.add(user)
         db.session.commit()
         db.session.refresh(user)
-        return "You have been verified!<br>Please ensure your network admin has accepted your registration for site-wide access."
+        return "You have been verified, you may now log in!<br>Please ensure your network admin has accepted your registration for site-wide access."
     else:
-        return "An error occurred. Please close this window."
+        return redirect(url_for('error'))
+
+@app.route('/error')
+def error():
+    return render_template('error.html')
+
+@app.route('/inactive')
+@login_required
+def inactive():
+    if current_user.account_active:
+        return redirect(url_for('dashboard'))
+    return render_template('inactive.html')

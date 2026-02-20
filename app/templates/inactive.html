@@ -7,9 +7,18 @@
           <p><strong>To gain web access, be sure the following has been completed:</strong></p>
 
           <ul>
+            {% if current_user.email_verified %}
+            <li><strike>Verify your email by visiting your inbox</strike></li>
+            {% else %}
             <li>Verify your email by visiting your inbox. Click <a href="#">here</a> to resend</li>
+            {% endif %}
             <br>
+
+            {% if current_user.account_active %}
+            <li><strike>Ensure your network admin has accepted your registration request</strike></li>
+            {% else %}
             <li>Ensure your network admin has accepted your registration request</li>
+            {% endif %}
           </ul>
         </div>
 

@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
   <main class="auth-page">
     <div class="vignette" aria-hidden="true"></div>
 
@@ -8,88 +6,69 @@
       <img class="logo" src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/698aa096c5da0061265e8409/5ef85f072_ChatGPTImageFeb9202608_26_44PM.png" alt="Mueller Excavating Inc." />
     </div>
 
-    {% if show_form %}
-      {% if form.errors %}
-        <div class="alert alert-info" role="alert">
-          <ul>
-            {% for error in form.email.errors %}
-              <li> {{error}} </li>
-            {% endfor %}
-
-            {% for error in form.full_name.errors %}
-              <li> {{error}} </li>
-            {% endfor %}
-
-            {% for error in form.password.errors %}
-              <li> {{error}} </li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
-
-      <section class="card-wrap" aria-label="Login form">
-        <!--  <div class="avatar" aria-hidden="true">
-          
-          <svg viewBox="0 0 24 24" class="icon-xl" role="img" aria-label="User icon">
-          <path d="M20 21a8 8 0 0 0-16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-      </div>   -->
-
-          <div class="card auth-card">
-          <!-- No JS: this can only submit to a URL or link -->
-          <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-              <div class="field">
-                  <div class="input-row">
-                  <!-- User icon -->
-                  <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Username">
-                      <path d="M20 21a8 8 0 0 0-16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                      <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  {{ form.full_name(type='text', placeholder='Full Name', autocomplete='username') }}
-                  </div>
-              </div>
-
-              <div class="field">
-                  <div class="input-row">
-                  <!-- Email icon -->
-                  <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Username">
-                    
-                  </svg>
-                  
-                  {{ form.email(type='text', placeholder='Email', autocomplete='username') }}
-                  </div>
-              </div>
-
-              <div class="field">
-                  <div class="input-row">
-                  <!-- Lock icon -->
-                  <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Password">
-                      <path d="M17 11V8a5 5 0 0 0-10 0v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                      <path d="M7 11h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  {{ form.password(type='password', placeholder='••••••••', autocomplete='current-password') }}
-                  </div>
-              </div>
-
-              <div class="row">
-                <a class="forgot" href="{{ url_for('login') }}" aria-label="Registration">Already a user?</a>
-              </div>
-            {{ form.submit(class='btn-red') }}
-          </form>
-        </div>
-      </section>
-    {% else %}
-      <div>
-        <p><strong>To gain web access, be sure the following has been completed:</strong></p>
+    {% if form.errors %}
+      <div class="alert alert-info" role="alert">
         <ul>
-          <li>Verify your email by visiting your inbox. Click <a href="#">here</a> to resend</li>
-          <br>
-          <li>Ensure your network admin has accepted your registration request</li>
+          {% for error in form.email.errors %}
+            <li>{{ error }}</li>
+          {% endfor %} {% for error in form.full_name.errors %}
+            <li>{{ error }}</li>
+          {% endfor %} {% for error in form.password.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
         </ul>
       </div>
     {% endif %}
+
+    {% if email_feedback %}
+      <div class="alert alert-info" role="alert">
+        {{ email_feedback }}
+      </div>
+    {% endif %}
+
+    <section class="card-wrap" aria-label="Login form">
+      <div class="card auth-card">
+        <!-- No JS: this can only submit to a URL or link -->
+        <form action="" method="post" novalidate>
+          {{ form.hidden_tag() }}
+          <div class="field">
+            <div class="input-row">
+              <!-- User icon -->
+              <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Username">
+                <path d="M20 21a8 8 0 0 0-16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {{ form.full_name(type='text', placeholder='Full Name', autocomplete='username') }}
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="input-row">
+              <!-- Email icon -->
+              <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Username"></svg>
+
+              {{ form.email(type='text', placeholder='Email', autocomplete='username') }}
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="input-row">
+              <!-- Lock icon -->
+              <svg viewBox="0 0 24 24" class="icon" role="img" aria-label="Password">
+                <path d="M17 11V8a5 5 0 0 0-10 0v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M7 11h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {{ form.password(type='password', placeholder='••••••••', autocomplete='current-password') }}
+            </div>
+          </div>
+
+          <div class="row">
+            <a class="forgot" href="{{ url_for('login') }}" aria-label="Registration">Already a user?</a>
+          </div>
+          {{ form.submit(class='btn-red') }}
+        </form>
+      </div>
+    </section>
     <p class="footer">© 2026 Mueller Excavating Inc. All rights reserved.</p>
   </main>
 {% endblock %}

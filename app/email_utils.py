@@ -28,12 +28,12 @@ def send_verification_email(to, name, verification_url):
     try:
         msg = Message(
             sender="<no-reply@notifications.muellerindex.org>",
-            subject="Action Required❗",
+            subject="Email Verification Required",
             recipients=[to],
             html=render_template('emails/verification.html', name=name, verify_url=verification_url, email=to)
         )
         mail.send(msg)
-        logging.info(f"Verification email sent to {to}")
+        # logging.info(f"Verification email sent to {to}")
     except Exception as e:
         logging.error(f"Error sending email to {to}: {str(e)}")
         logging.error(traceback.format_exc()) 
