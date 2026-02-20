@@ -1,9 +1,9 @@
 from flask import render_template, url_for, redirect, request
-from app import app, db
+from app import app, db, mail
 from app.forms import LoginForm, RegisterForm
 from app.models import User, Role
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
-from app.email import sendEmail
+from app.email_utils import generate_token, confirm_token, send_verification_email
 from sqlalchemy import select
 from urllib.parse import urlsplit
 
@@ -21,6 +21,8 @@ def dashboard():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
+    elif current_user.account_active is False:
+        return render_template('register.html', form=None, show_form=False)
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -46,7 +48,7 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if current_user.is_authenticated and current_user.account_active:
+    if current_user.is_authenticated and current_user.account_active: #technically dont need both
         return redirect(url_for('dashboard'))
     
     form = RegisterForm()
@@ -57,40 +59,28 @@ def register():
         db.session.commit()
         db.session.refresh(user)
 
-        login_user(user=user)
-        sendEmail([form.email.data], subject="Action Needed")
+        token = generate_token(form.email.data)
+        verification_url = url_for('verify', token=token, _external=True) #external to create absolute url
+        send_verification_email(form.email.data, form.full_name.data, verification_url=verification_url)
 
         print("db flag:", user.__dict__.get("active") or user.__dict__.get("is_active"))
         print("flask-login is_active:", current_user.is_active)
 
-        return redirect(url_for('inactive'))
-
-    return render_template('register.html', form=form)
-
-
+        # login_user(user=user)
+        return render_template('register.html', form=None, show_form=False)
+    return render_template('register.html', form=form, show_form=True)
 
 
-@app.route('/inactive')
-@login_required
-def inactive():
-    if current_user.account_active:
-        return redirect(url_for('dashboard'))
-    return render_template('inactive.html')
+@app.route('/verify/<token>')
+def verify(token):
+    email = confirm_token(token)
+    user = User.query.filter_by(email=email).first()
 
-@app.route('/verify/<id>')
-@login_required
-def inventory(id):
-    user = User.query.filter_by()
-
-    return render_template('inventory.html')
-
-# @app.route('/dashboard/inventory/configure')
-# @login_required
-# def config_inventory():
-#     return render_template('base.html')
-
-# @app.route('/dashboard/team')
-# @login_required
-# def team():
-#     members = User.query.all()
-#     return render_template('team_page.html', members=members)
+    if email and user is not None:
+        user.email_verified = True
+        db.session.add(user)
+        db.session.commit()
+        db.session.refresh(user)
+        return "You have been verified!<br>Please ensure your network admin has accepted your registration for site-wide access."
+    else:
+        return "An error occurred. Please close this window."

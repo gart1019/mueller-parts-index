@@ -19,7 +19,6 @@ def load_user(userId):
 class User(UserMixin, db.Model):
     __tablename__ = "user"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    verification_id: Mapped[UUID] = mapped_column(UUID(), unique=True, nullable=True) #UUID of email link
     full_name: Mapped[str] = mapped_column(String(50))
     email: Mapped[str] = mapped_column(unique=True)
     account_active: Mapped[Boolean] = mapped_column(Boolean(), default=False)
@@ -27,8 +26,11 @@ class User(UserMixin, db.Model):
     password_hash: Mapped[Optional[str]] = mapped_column(String(150))
     created_at: Mapped[datetime] = mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
 
+    def set_verify(self, token):
+        self.verification_id = token
+
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        self.password_hash = generate_password_hash(password, salt_length=32)
 
     def check_password(self, password):
         return check_password_hash(str(self.password_hash), password)

@@ -5,4 +5,4 @@ flask-admin[images,export,sqlalchemy]
 flask-login
 flask-sqlalchemy
 flask-alembic
-resend
+flask-mail
