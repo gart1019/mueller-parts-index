@@ -19,10 +19,11 @@ def load_user(userId):
 class User(UserMixin, db.Model):
     __tablename__ = "user"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    verification_id: Mapped[UUID] = mapped_column(UUID(), unique=True)
+    verification_id: Mapped[UUID] = mapped_column(UUID(), unique=True, nullable=True) #UUID of email link
     full_name: Mapped[str] = mapped_column(String(50))
     email: Mapped[str] = mapped_column(unique=True)
     account_active: Mapped[Boolean] = mapped_column(Boolean(), default=False)
+    email_verified: Mapped[Boolean] = mapped_column(Boolean(), default=False)
     password_hash: Mapped[Optional[str]] = mapped_column(String(150))
     created_at: Mapped[datetime] = mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
 
@@ -114,7 +115,8 @@ class BaseView(ModelView):
 
 class UserView(BaseView, ModelView):
     can_create = False
-    column_editable_list = ['full_name', 'email', 'account_active']
+    column_editable_list = ['full_name', 'email', 'account_active', 'email_verified']
+    column_exclude_list = ['verification_id', 'password_hash']
     column_searchable_list = ['full_name', 'email']
 
 class ProductView(BaseView, ModelView):

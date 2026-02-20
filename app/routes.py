@@ -3,6 +3,7 @@ from app import app, db
 from app.forms import LoginForm, RegisterForm
 from app.models import User, Role
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
+from app.email import sendEmail
 from sqlalchemy import select
 from urllib.parse import urlsplit
 
@@ -57,6 +58,8 @@ def register():
         db.session.refresh(user)
 
         login_user(user=user)
+        sendEmail([form.email.data], subject="Action Needed")
+
         print("db flag:", user.__dict__.get("active") or user.__dict__.get("is_active"))
         print("flask-login is_active:", current_user.is_active)
 
