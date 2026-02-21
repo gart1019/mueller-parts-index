@@ -16,7 +16,7 @@ class Config:
     RECAPTCHA_DATA_ATTRS = {'theme': 'dark'}
 
     MAIL_SERVER = os.getenv("MAIL_SERVER")
-    MAIL_PORT = int(os.getenv("MAIL_PORT", 587))
+    MAIL_PORT = int(os.getenv("MAIL_PORT", 465))
     MAIL_USE_TLS = True  # Use TLS for most SMTP providers
     MAIL_USE_SSL = False  # Use SSL only if required (never enable both)
     MAIL_USERNAME = os.getenv("MAIL_USERNAME")
