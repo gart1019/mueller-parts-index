@@ -5,12 +5,11 @@
     <div class="vignette" aria-hidden="true"></div>
         <div>
           <p><strong>To gain web access, be sure the following has been completed:</strong></p>
-
           <ul>
             {% if current_user.email_verified %}
             <li><strike>Verify your email by visiting your inbox</strike></li>
             {% else %}
-            <li>Verify your email by visiting your inbox. Click <a href="#">here</a> to resend</li>
+            <li>Verify your email by visiting your inbox. <strike>Click <a href="#">here</a> to resend</strike></li>
             {% endif %}
             <br>
 
@@ -20,6 +19,7 @@
             <li>Ensure your network admin has accepted your registration request</li>
             {% endif %}
           </ul>
+          <p>Click <a href="{{ url_for('login') }}">here</a> to to login.</p>
         </div>
 
     <p class="footer">© 2026 Mueller Excavating Inc. All rights reserved.</p>

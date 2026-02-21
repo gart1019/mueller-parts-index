@@ -1,4 +1,12 @@
+{% extends 'base.html' %}
 
-
-
-An error has occurred. Close this window, or click <a href="{{ url_for('login') }}">here</a> to sign in.
+{% block content %}
+  <main class="auth-page">
+    <div class="vignette" aria-hidden="true"></div>
+        <div>
+            <h1><strong>Uh oh!</strong></h1>
+            <h3>That wasn't supposed to happen...</h3>
+            <h4>Click <a href="{{ url_for('login') }}">here</a> to to login.</h4>
+        </div>
+  </main>
+{% endblock %}
