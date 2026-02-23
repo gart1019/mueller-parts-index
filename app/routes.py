@@ -12,6 +12,7 @@ from urllib.parse import urlsplit
 @app.route('/dashboard')
 @login_required
 def dashboard():
+    print("running")
     if not current_user.account_active or not current_user.email_verified:
         return redirect(url_for('inactive'))
     return render_template('dashboard.html')
@@ -55,7 +56,6 @@ def register():
         user.set_password(password=form.password.data)
         db.session.add(user)
         db.session.commit()
-        db.session.refresh(user)
 
         token = generate_token(form.email.data) #sign a token representing the users email
         verification_url = url_for('verify', token=token, _external=True) #external to create absolute url
@@ -88,8 +88,8 @@ def error():
     return render_template('error.html')
 
 @app.route('/inactive')
-@login_required
 def inactive():
-    if current_user.account_active:
-        return redirect(url_for('dashboard'))
+    if current_user is not None:
+        logout()
     return render_template('inactive.html')
+

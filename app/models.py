@@ -122,7 +122,7 @@ class UserView(BaseView, ModelView):
     column_searchable_list = ['full_name', 'email']
 
 class ProductView(BaseView, ModelView):
-    column_editable_list = ['brand','name', 'machine', 'identifier','stock_count']
+    column_editable_list = ['brand','name', 'machine', 'identifier']
 
 class BrandView(BaseView, ModelView):
     column_editable_list = ['name']
