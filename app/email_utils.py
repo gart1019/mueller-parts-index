@@ -1,6 +1,5 @@
 import logging
 import traceback
-from threading import Thread
 from flask import render_template
 from flask_mail import Message
 from itsdangerous import URLSafeSerializer, SignatureExpired, BadSignature
@@ -25,18 +24,15 @@ def confirm_token(token, expiration=3600):
         return False
 
 def send_verification_email(to, name, verification_url):
-    print("func started")
     try:
-        print("try started")
         msg = Message(
-            sender="<no-reply@notifications.muellerindex.org>",
+            sender="no-reply@notifications.muellerindex.org",
             subject="Email Verification Required",
             recipients=[to],
             html=render_template('emails/verification.html', name=name, verify_url=verification_url, email=to)
+            # str(lambda: render_template('emails/verification.html', name=name, verify_url=verification_url, email=to))
         )
-        print("sending")
         mail.send(msg)
-        print("sent")
         logging.info(f"Verification email sent to {to}")
     except Exception as e:
         logging.error(f"Error sending email to {to}: {str(e)}")

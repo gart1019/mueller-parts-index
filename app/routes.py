@@ -1,5 +1,5 @@
 from flask import render_template, url_for, redirect, request
-from app import app, db, mail
+from app import app, db
 from app.forms import LoginForm, RegisterForm
 from app.models import User, Role
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
@@ -52,14 +52,22 @@ def register():
     
     form = RegisterForm()
     if form.validate_on_submit():
+
+
+        token = generate_token(form.email.data) #sign a token representing the users email
+        verification_url = url_for('verify', token=token, _external=True) #external to create absolute url
+
+
+        # print(form.email.data, form.full_name.data, verification_url)
+        send_verification_email(form.email.data, form.full_name.data, verification_url=verification_url) 
+        #send email with link
+
+
+
         user = User(e=form.email.data, n=form.full_name.data)
         user.set_password(password=form.password.data)
         db.session.add(user)
         db.session.commit()
-
-        token = generate_token(form.email.data) #sign a token representing the users email
-        verification_url = url_for('verify', token=token, _external=True) #external to create absolute url
-        send_verification_email(form.email.data, form.full_name.data, verification_url=verification_url) #send email with link
 
         print("db flag:", user.__dict__.get("active") or user.__dict__.get("is_active"))
         print("flask-login is_active:", current_user.is_active)
@@ -79,12 +87,12 @@ def verify(token):
         db.session.add(user)
         db.session.commit()
         db.session.refresh(user)
-        return "You have been verified, you may now log in!<br>Please ensure your network admin has accepted your registration for site-wide access."
+        return render_template('verified_confirmation.html')
     else:
-        return redirect(url_for('error'))
+        return redirect(url_for('error_page'))
 
 @app.route('/error')
-def error():
+def error_page():
     return render_template('error.html')
 
 @app.route('/inactive')

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <main class="auth-page">
+    <div class="vignette" aria-hidden="true"></div>
+        <div>
+            <h3>You have been verified, you may now <a href="{{ url_for('login') }}">sign in here</a>!<br>Please ensure your network admin has accepted your registration for site-wide access.</h3>
+        </div>
+  </main>
+{% endblock %}

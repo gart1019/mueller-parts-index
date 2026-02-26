@@ -53,7 +53,8 @@ class Product(db.Model):
     stock_count: Mapped[int] = mapped_column(Integer, default=0)
     machine_id: Mapped[Optional[int]] = mapped_column(ForeignKey("machine.id"), nullable=True)
     machine: Mapped[Optional["Machine"]] = relationship()
-    created_by: Mapped[str] = mapped_column(String(110))
+    created_by_id: Mapped[int] = mapped_column(ForeignKey("user.id"), default=lambda: current_user.id) 
+    created_by: Mapped["User"] = relationship()
     created_at: Mapped[datetime] = mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
 
     def __repr__(self) -> str:
@@ -63,7 +64,8 @@ class Brand(db.Model):
     __tablename__ = "brand"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(75))
-    created_by: Mapped[str] = mapped_column(String(110))
+    created_by_id: Mapped[int] = mapped_column(ForeignKey("user.id"), default=lambda: current_user.id) 
+    created_by: Mapped["User"] = relationship()
     created_at: Mapped[datetime] = mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
 
     def __init__(self, name: str, user) -> None:
@@ -78,12 +80,12 @@ class Machine(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(75))
     created_by_id: Mapped[int] = mapped_column(ForeignKey("user.id"), default=lambda: current_user.id) 
-    created_by: Mapped[str] = mapped_column(String(110))
+    created_by: Mapped["User"] = relationship()
     created_at: Mapped[datetime] = mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
 
-    def __init__(self, name: str, user: str) -> None:
-        self.name=name
-        self.created_by=user
+    # def __init__(self, name: str, user: str) -> None:
+    #     self.name=name
+    #     # self.created_by=user
 
     def __repr__(self) -> str:
         return str(self.name)
@@ -107,7 +109,7 @@ class BaseView(ModelView):
         print(current_user)
         print(current_user.full_name)
         if is_created:
-            model.created_by = str(current_user.full_name)
+            model.created_by = current_user
 
     def is_accessible(self) -> bool:
         return current_user.is_authenticated
